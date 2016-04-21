@@ -1,0 +1,13 @@
+parser = ConfigParser.SafeConfigParser()
+configFile = open('configFileName', 'w+')
+parser.readfp(configFile)
+try:
+    parser.items('server')
+except ConfigParser.NoSectionError:
+    parser.add_section('server')
+
+    try:
+        host = parser.get('server', 'host')
+    except ConfigParser.NoOptionError:
+        host = ''
+        parser.set('server', 'host', host)
